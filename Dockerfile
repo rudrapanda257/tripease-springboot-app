@@ -1,10 +1,10 @@
-# Use Java 17 JDK
-FROM eclipse-temurin:17-jdk-alpine
+# Use Java 21 JDK
+FROM eclipse-temurin:21-jdk-alpine
 
 # Install Maven and bash
 RUN apk add --no-cache maven bash
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
 # Copy pom.xml and download dependencies
@@ -17,7 +17,7 @@ COPY src ./src
 # Build the app
 RUN mvn package -DskipTests
 
-# Expose port (default Spring Boot port)
+# Expose port
 EXPOSE 8080
 
 # Run the app
