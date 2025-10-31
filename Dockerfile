@@ -20,5 +20,5 @@ RUN mvn package -DskipTests
 # Expose port
 EXPOSE 8080
 
-# Run the app
-CMD ["java", "-jar", "target/tripease-springboot-app.jar"]
+# Run the app (use wildcard to match jar)
+CMD ["sh", "-c", "java -jar target/*.jar"]
