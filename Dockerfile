@@ -1,18 +1,21 @@
 # Use Java 17 JDK
 FROM eclipse-temurin:17-jdk-alpine
 
+# Install Maven and bash
+RUN apk add --no-cache maven bash
+
 # Set working directory inside container
 WORKDIR /app
 
 # Copy pom.xml and download dependencies
 COPY pom.xml .
-RUN ./mvnw dependency:go-offline || mvn dependency:go-offline
+RUN mvn dependency:go-offline
 
 # Copy source code
 COPY src ./src
 
 # Build the app
-RUN ./mvnw package -DskipTests || mvn package -DskipTests
+RUN mvn package -DskipTests
 
 # Expose port (default Spring Boot port)
 EXPOSE 8080
